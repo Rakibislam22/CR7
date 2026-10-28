@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingRoot: path.resolve(__dirname),
   experimental: {
     agentFeedback: true,
+    cpus: 1,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {

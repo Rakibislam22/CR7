@@ -28,8 +28,54 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark h-full antialiased selection:bg-amber-500/30 selection:text-amber-200">
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 font-sans">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="dark h-full antialiased selection:bg-amber-500/30 selection:text-amber-200"
+    >
+      <head>
+        {/* Prevent hydration mismatches caused by browser extensions (e.g. Urban VPN injecting bis_skin_checked) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var clean = function(node) {
+                    if (node && node.nodeType === 1) {
+                      if (node.hasAttribute('bis_skin_checked')) node.removeAttribute('bis_skin_checked');
+                      if (node.hasAttribute('bis_register')) node.removeAttribute('bis_register');
+                    }
+                  };
+                  var observer = new MutationObserver(function(mutations) {
+                    for (var i = 0; i < mutations.length; i++) {
+                      var m = mutations[i];
+                      if (m.type === 'attributes') {
+                        var name = m.attributeName;
+                        if (name && (name === 'bis_skin_checked' || name === 'bis_register' || name.indexOf('__processed_') === 0)) {
+                          m.target.removeAttribute(name);
+                        }
+                      } else if (m.type === 'childList') {
+                        for (var j = 0; j < m.addedNodes.length; j++) {
+                          clean(m.addedNodes[j]);
+                        }
+                      }
+                    }
+                  });
+                  observer.observe(document.documentElement, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true
+                  });
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 font-sans"
+      >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

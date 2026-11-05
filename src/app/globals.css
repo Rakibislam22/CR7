@@ -33,22 +33,36 @@ body {
 
 /* Glassmorphism card helpers */
 .glass-panel {
-  background: rgba(24, 24, 27, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(24, 24, 27, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel-gold {
-  background: linear-gradient(135deg, rgba(234, 179, 8, 0.06), rgba(24, 24, 27, 0.8));
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(234, 179, 8, 0.2);
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(24, 24, 27, 0.85));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 179, 8, 0.25);
 }
 
 .glow-gold {
-  box-shadow: 0 0 35px -5px rgba(234, 179, 8, 0.25);
+  box-shadow: 0 0 45px -5px rgba(234, 179, 8, 0.3);
 }
 
 .glow-crimson {
-  box-shadow: 0 0 35px -5px rgba(225, 29, 72, 0.25);
+  box-shadow: 0 0 45px -5px rgba(225, 29, 72, 0.3);
+}
+
+/* Football pitch grid texture */
+.pitch-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Trophy gradient sheen */
+.gold-sheen {
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
